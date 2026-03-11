@@ -50,6 +50,12 @@ else
     echo "[!] requirements.txt not found, skipping Python deps."
 fi
 
+# reminder for cloudflared installation
+echo "[*] Note: this installer does not configure cloudflared.
+      Please download the cloudflared CLI from Cloudflare or install
+      via your package manager. See:
+      https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/installation"
+
 # --------------------------
 # Configure Tor
 # --------------------------

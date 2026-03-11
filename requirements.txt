@@ -2,7 +2,5 @@ requests
 dnspython
 rich
 colorama
-stem 
-requests 
+stem
 pysocks
-pyngrok

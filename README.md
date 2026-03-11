@@ -8,6 +8,8 @@ A powerful social engineering toolkit that automates phishing, OTP/email bombing
 
 > ⚠️ For educational use only. Do **not** use this tool against anyone without explicit permission.
 
+> **Note:** This tool has been updated to a JavaScript codebase and published on npmjs for easier installation and additional features.  
+> Please check the latest version: https://www.npmjs.com/package/socialengineering
 ---
 
 ## 📌 Features
@@ -34,13 +36,20 @@ A powerful social engineering toolkit that automates phishing, OTP/email bombing
   * `stem `
   * `requests `
   * `pysocks`
-  * `pyngrok`
+  * `cloudflared` (install separately as a CLI binary)
 
-Install them with:
+Install the Python dependencies with:
 
 ```bash
 pip install -r requirements.txt
 sudo apt install tor -y
+```
+
+Cloudflared is not a Python package; download it from Cloudflare’s site or use a package
+manager. For details see:
+
+```
+https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/installation
 ```
 
 ---

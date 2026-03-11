@@ -29,6 +29,7 @@ from rich.table import Table
 from includes import banner
 from rich.prompt import IntPrompt
 import os
+from rich import box
 
 console = Console()
 
@@ -37,18 +38,28 @@ def clear():
 
 def main_menu():
     try:
-        table = Table(title="[bold green]Main Menu[/bold green]", show_header=True, header_style="bold blue")
-        table.add_column("No.", style="bold cyan")
-        table.add_column("Option", style="bold white")
+        table = Table(
+            title="[bold green]Main Menu[/bold green]",
+            show_header=True,
+            header_style="bold blue",
+            box=box.SQUARE
+        )
+
+        table.add_column("No.", justify="center", style="bold cyan", width=4)
+        table.add_column("Option", style="bold white", width=28)
+
         table.add_row("1", "🎯 Start Phishing Attack")
         table.add_row("2", "📲 OTP Bombing")
         table.add_row("3", "🎹 Keylogger")
         table.add_row("4", "📩 Email Bombing")
         table.add_row("5", "📧 Send Fake Email")
-        table.add_row("6", "🕵️  IP Changer")
+        table.add_row("6", "🛜 IP Changer ")
         table.add_row("0", "❌ Quit")
+
         console.print(table)
+
         return IntPrompt.ask("\n👉 Select an option")
+
     except EOFError:
         console.print("[red]❌ No input received! Exiting...[/red]")
         exit(1)
